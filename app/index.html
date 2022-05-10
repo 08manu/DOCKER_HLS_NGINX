@@ -1,0 +1,25 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.0.0-beta.2/hls.min.js"></script>
+
+<video id="video" controls ></video>
+<script>
+    if (Hls.isSupported()) {
+        var video = document.getElementById('video');
+        var hls = new Hls();
+        // bind them together
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+            console.log('video and hls.js are now bound together !');
+            hls.loadSource('http://10.90.84.11/hls/stream.m3u8');
+            hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+                console.log(
+                    'manifest loaded, found ' + data.levels.length + ' quality level'
+                );
+
+                console.log(data.levels);
+                console.log('bandwidthEstimate: '+hls.bandwidthEstimate/1000);
+            });
+        });
+        video.play();
+    }
+
+</script>
