@@ -113,9 +113,6 @@ RUN cd /tmp/ffmpeg-4.4 && \
   --extra-libs="-lpthread -lm" && \
   make && make install && make distclean
 
-# Cleanup.
-#RUN rm -rf /var/cache/* /tmp/*
-
 
 FROM alpine:3.14.2
 RUN     apk update              &&      \
@@ -141,7 +138,6 @@ RUN     apk update              &&      \
 
 
 COPY --from=builder /usr/local/nginx /usr/local/nginx
-#COPY --from=0 /tmp/nginx-rtmp-module/stat.xsl /opt/nginx/conf/stat.xsl
 COPY --from=build-ffmpeg /usr/local /usr/local
 COPY --from=build-ffmpeg /usr/lib/libfdk-aac.so.2 /usr/lib/libfdk-aac.so.2
 

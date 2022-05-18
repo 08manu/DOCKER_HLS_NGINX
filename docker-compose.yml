@@ -1,8 +1,8 @@
 version: '3.7'
 
 services:
-   hls_server:
-    container_name: hls_server
+   server_hls:
+    container_name: server_hls
     build:
       context: .
       dockerfile: Dockerfile
